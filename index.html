@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Instituto [Nombre del Instituto]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="logo-blanco.png" alt="Logo del Instituto" class="logo">
+                <h2>[Nombre del Instituto]</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-users"></i> Gestión de Usuarios <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                            <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+                            <li><a href="#"><i class="fas fa-user-tie"></i> Personal Administrativo</a></li>
+                            <li><a href="#"><i class="fas fa-user-tag"></i> Roles y Permisos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-book"></i> Gestión de Cursos <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#"><i class="fas fa-plus-circle"></i> Crear Curso</a></li>
+                            <li><a href="#"><i class="fas fa-list"></i> Ver Cursos</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-alt"></i> Horarios</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> Gestión Académica <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#"><i class="fas fa-clipboard-list"></i> Matriculación</a></li>
+                            <li><a href="#"><i class="fas fa-percent"></i> Calificaciones</a></li>
+                            <li><a href="#"><i class="fas fa-check-circle"></i> Asistencia</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fas fa-cogs"></i> Configuración del Sistema</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Reportes y Análisis</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2025 Instituto [Nombre]</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1>Dashboard del Administrador</h1>
+                    <span id="current-date-time" class="datetime"></span>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" placeholder="Buscar..." list="search-suggestions" id="global-search-input">
+                            <datalist id="search-suggestions">
+                                <option value="Juan Pérez (Estudiante)"></option>
+                                <option value="Cálculo I (Curso)"></option>
+                                <option value="Profesores de Matemáticas"></option>
+                                <option value="Gestión de usuarios"></option>
+                                <option value="Matriculación"></option>
+                            </datalist>
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="search-type-filter">
+                            <select id="search-type-select">
+                                <option value="all">Todo</option>
+                                <option value="students">Estudiantes</option>
+                                <option value="teachers">Profesores</option>
+                                <option value="courses">Cursos</option>
+                                <option value="documents">Documentos</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-center">
+                        <i class="fas fa-bell notification-icon" id="notification-bell"></i>
+                        <span class="notification-count" id="notification-count">5</span>
+                        <div class="notification-dropdown hidden" id="notification-dropdown">
+                            <h3>Notificaciones Recientes</h3>
+                            <ul>
+                                <li class="notification-item critical"><i class="fas fa-exclamation-circle"></i> Nueva solicitud de baja: **ID 12345** <span class="action-link">Ver</span></li>
+                                <li class="notification-item warning"><i class="fas fa-bell"></i> 2 cursos con menos de 10 inscritos <span class="action-link">Revisar</span></li>
+                                <li class="notification-item info"><i class="fas fa-info-circle"></i> Informe mensual de asistencia generado.</li>
+                                <li class="notification-item success"><i class="fas fa-check-circle"></i> Actualización de sistema completada.</li>
+                                <li class="notification-item"><i class="fas fa-comment"></i> Nuevo mensaje del Profesor Díaz.</li>
+                            </ul>
+                            <a href="#" class="view-all-notifications">Ver todas las notificaciones</a>
+                        </div>
+                    </div>
+
+                    <div class="user-info">
+                        <span>Hola, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </header>
+
+            <section class="overview-cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="card-info">
+                            <h3>Total Estudiantes</h3>
+                            <p id="total-students">1250</p>
+                        </div>
+                    </div>
+                    <div class="card-filters">
+                        <select onchange="updateStudentCount(this.value)">
+                            <option value="all">Todos</option>
+                            <option value="active">Activos</option>
+                            <option value="new">Nuevos (mes)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div class="card-info">
+                            <h3>Total Profesores</h3>
+                            <p id="total-teachers">85</p>
+                        </div>
+                    </div>
+                    <div class="card-filters">
+                        <select onchange="updateTeacherCount(this.value)">
+                            <option value="all">Todos</option>
+                            <option value="active">Activos</option>
+                            <option value="new">Nuevos (año)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="card-info">
+                            <h3>Cursos Activos</h3>
+                            <p id="total-courses">45</p>
+                        </div>
+                    </div>
+                    <div class="card-filters">
+                        <select onchange="updateCourseCount(this.value)">
+                            <option value="all">Todos</option>
+                            <option value="full">Llenos</option>
+                            <option value="low">Baja Inscripción</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="card-info">
+                            <h3>Eventos Próximos</h3>
+                            <p>5</p>
+                        </div>
+                    </div>
+                    <div class="card-filters">
+                        <select>
+                            <option value="week">Esta Semana</option>
+                            <option value="month">Este Mes</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-sections">
+                <div class="section-column wide-column">
+                    <div class="card kpi-card">
+                        <h2>Indicadores Clave de Gestión</h2>
+                        <div class="kpi-grid">
+                            <div class="kpi-item">
+                                <div class="kpi-value">55 <i class="fas fa-arrow-up trend-up"></i></div>
+                                <div class="kpi-label">Nuevos Estudiantes (Últ. 30 días)</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value">7 <i class="fas fa-exclamation-triangle warning-icon"></i></div>
+                                <div class="kpi-label">Cursos con Baja Inscripción</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value">$12.500 <i class="fas fa-money-bill-wave trend-neutral"></i></div>
+                                <div class="kpi-label">Pagos Pendientes</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value">12 <i class="fas fa-file-alt trend-up"></i></div>
+                                <div class="kpi-label">Nuevas Solicitudes (Admisión)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card quick-actions">
+                        <h2>Acciones Rápidas</h2>
+                        <div class="action-buttons">
+                            <a href="#" class="btn btn-primary" onclick="showToast('Nuevo usuario añadido con éxito!', 'success')"><i class="fas fa-user-plus"></i> Añadir Nuevo Usuario</a>
+                            <a href="#" class="btn btn-secondary" onclick="showToast('Curso creado exitosamente.', 'success')"><i class="fas fa-book-medical"></i> Crear Nuevo Curso</a>
+                            <a href="#" class="btn btn-accent" onclick="showToast('Roles y permisos actualizados.', 'info')"><i class="fas fa-tasks"></i> Asignar Rol / Permisos</a>
+                            <a href="#" class="btn btn-outline" onclick="showToast('Documentos subidos correctamente.', 'success')"><i class="fas fa-file-upload"></i> Subir Documentos</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-column narrow-column">
+                    <div class="card activity-feed">
+                        <h2>Actividad Reciente</h2>
+                        <ul>
+                            <li><i class="fas fa-check-circle activity-success"></i> **Juan Pérez** se matriculó en "Fundamentos de Programación" (<a href="#">ID: 2023001</a>). <span class="time">Hace 5 min</span></li>
+                            <li><i class="fas fa-info-circle activity-info"></i> **Profesor Gómez** actualizó el temario de "Cálculo I". <span class="time">Hace 30 min</span></li>
+                            <li><i class="fas fa-exclamation-triangle activity-warning"></i> **Alerta:** Hay 3 solicitudes de cambio de rol pendientes. <a href="#" class="action-link">Revisar</a> <span class="time">Hace 1 hora</span></li>
+                            <li><i class="fas fa-user-plus activity-default"></i> **María López** se registró como nueva estudiante. <span class="time">Hace 2 horas</span></li>
+                            <li><i class="fas fa-clipboard-list activity-default"></i> **Admin:** Nuevo reporte de asistencia generado. <span class="time">Ayer</span></li>
+                            <li><a href="#" class="view-all-link">Ver toda la actividad <i class="fas fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="card tasks-card">
+                        <h2>Tareas Pendientes</h2>
+                        <ul>
+                            <li>
+                                <label class="checkbox-container">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Revisar 3 solicitudes de cambio de rol <span class="task-priority high">Urgente</span>
+                                </label>
+                                <a href="#" class="task-action-link">Ir a Revisar</a>
+                            </li>
+                            <li>
+                                <label class="checkbox-container">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Actualizar el calendario académico <span class="task-priority medium">Esta semana</span>
+                                </label>
+                                <a href="#" class="task-action-link">Ir a Configuración</a>
+                            </li>
+                            <li>
+                                <label class="checkbox-container">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    Añadir 20 estudiantes a cursos <span class="task-priority low">Pendiente</span>
+                                </label>
+                                <a href="#" class="task-action-link">Ir a Matriculación</a>
+                            </li>
+                            <li>
+                                <a href="#" class="add-task-link"><i class="fas fa-plus-circle"></i> Añadir nueva tarea</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        // Script para la fecha y hora actual
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('current-date-time').textContent = now.toLocaleDateString('es-ES', options);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Script para el menú desplegable (simplificado para hover, y clic para móvil)
+        document.querySelectorAll('.has-submenu').forEach(item => {
+            // Hover para desktop
+            item.addEventListener('mouseover', () => {
+                if (window.innerWidth > 1024) { // Activa solo en pantallas grandes
+                    const submenu = item.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.style.display = 'block';
+                        item.querySelector('.submenu-arrow').style.transform = 'rotate(90deg)';
+                    }
+                }
+            });
+            item.addEventListener('mouseout', () => {
+                if (window.innerWidth > 1024) { // Activa solo en pantallas grandes
+                    const submenu = item.querySelector('.submenu');
+                    if (submenu) {
+                        submenu.style.display = 'none';
+                        item.querySelector('.submenu-arrow').style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+
+            // Clic para móvil/táctil (maneja la apertura/cierre)
+            item.querySelector('a').addEventListener('click', function(event) {
+                if (window.innerWidth <= 1024) {
+                    const parentLi = this.closest('li.has-submenu');
+                    const submenu = parentLi.querySelector('.submenu');
+                    const arrow = parentLi.querySelector('.submenu-arrow');
+
+                    // Cierra otros submenús abiertos si no es el actual
+                    document.querySelectorAll('.submenu').forEach(s => {
+                        if (s !== submenu) {
+                            s.style.display = 'none';
+                            s.closest('.has-submenu').querySelector('.submenu-arrow').style.transform = 'rotate(0deg)';
+                        }
+                    });
+
+                    if (submenu) {
+                        if (submenu.style.display === 'block') {
+                            submenu.style.display = 'none';
+                            arrow.style.transform = 'rotate(0deg)';
+                        } else {
+                            submenu.style.display = 'block';
+                            arrow.style.transform = 'rotate(90deg)';
+                        }
+                        event.preventDefault(); // Evita que el enlace padre navegue
+                    }
+                }
+            });
+        });
+
+        // Script para el Centro de Notificaciones
+        document.getElementById('notification-bell').addEventListener('click', function() {
+            const dropdown = document.getElementById('notification-dropdown');
+            dropdown.classList.toggle('hidden');
+            // Opcional: Marcar todas como leídas al abrir
+            document.getElementById('notification-count').textContent = '0'; 
+        });
+
+        // Cerrar el dropdown de notificaciones si se hace clic fuera
+        document.addEventListener('click', function(event) {
+            const notificationBell = document.getElementById('notification-bell');
+            const notificationDropdown = document.getElementById('notification-dropdown');
+            if (!notificationBell.contains(event.target) && !notificationDropdown.contains(event.target)) {
+                notificationDropdown.classList.add('hidden');
+            }
+        });
+
+        // Script para mensajes Toast
+        function showToast(message, type = 'info', duration = 3000) {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.classList.add('toast', type);
+            toast.textContent = message;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('hide'); // Inicia la animación de desvanecimiento
+                toast.addEventListener('transitionend', () => toast.remove()); // Elimina después de la transición
+            }, duration);
+        }
+
+        // Simulación de filtros en tarjetas de resumen (para demostración)
+        const studentCounts = {
+            all: 1250,
+            active: 1100,
+            new: 55
+        };
+        const teacherCounts = {
+            all: 85,
+            active: 80,
+            new: 5
+        };
+        const courseCounts = {
+            all: 45,
+            full: 15,
+            low: 7
+        };
+
+        function updateStudentCount(filter) {
+            document.getElementById('total-students').textContent = studentCounts[filter];
+        }
+        function updateTeacherCount(filter) {
+            document.getElementById('total-teachers').textContent = teacherCounts[filter];
+        }
+        function updateCourseCount(filter) {
+            document.getElementById('total-courses').textContent = courseCounts[filter];
+        }
+
+    </script>
+</body>
+</html>
