@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Estudiantes{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Listado de Estudiantes</h1>
+    <span class="datetime">{% block datetime %}{% endblock %}</span>
+</div>
+
+<div class="students-controls">
+    <div class="students-search-and-filter">
+        <div class="students-search-container">
+            <input type="text" placeholder="Buscar por nombre, ID o curso..." class="students-search-input">
+            <i class="fas fa-search"></i>
+        </div>
+        <select class="students-filter-select">
+            <option value="all">Todos los Cursos</option>
+            <option value="matematica">Matemáticas I</option>
+            <option value="programacion">Programación</option>
+            <option value="quimica">Química Orgánica</option>
+        </select>
+        <select class="students-filter-select">
+            <option value="enrolled">Estado: Matriculados</option>
+            <option value="graduated">Graduados</option>
+            <option value="dropped">Baja</option>
+        </select>
+    </div>
+    <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i> Registrar Nuevo Estudiante</a>
+</div>
+
+<div class="card students-table-card">
+    <div class="students-table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>ID de Matrícula</th>
+                    <th>Curso Actual</th>
+                    <th>Promedio General</th>
+                    <th>Estado</th>
+                    <th class="students-actions-column">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>María López</td>
+                    <td>MAT-2023001</td>
+                    <td>Programación I</td>
+                    <td>8.5</td>
+                    <td><span class="students-status students-status-enrolled">Matriculado</span></td>
+                    <td>
+                        <a href="#" title="Ver Expediente"><i class="fas fa-file-alt students-action-icon"></i></a>
+                        <a href="#" title="Editar"><i class="fas fa-edit students-action-icon"></i></a>
+                        <a href="#" title="Enviar Mensaje"><i class="fas fa-envelope students-action-icon"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pedro Ramírez</td>
+                    <td>MAT-2022055</td>
+                    <td>Matemáticas III</td>
+                    <td>7.2</td>
+                    <td><span class="students-status students-status-enrolled">Matriculado</span></td>
+                    <td>
+                        <a href="#" title="Ver Expediente"><i class="fas fa-file-alt students-action-icon"></i></a>
+                        <a href="#" title="Editar"><i class="fas fa-edit students-action-icon"></i></a>
+                        <a href="#" title="Enviar Mensaje"><i class="fas fa-envelope students-action-icon"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sofía Vargas</td>
+                    <td>MAT-2021034</td>
+                    <td>-</td>
+                    <td>9.1</td>
+                    <td><span class="students-status students-status-graduated">Graduado</span></td>
+                    <td>
+                        <a href="#" title="Ver Expediente"><i class="fas fa-file-alt students-action-icon"></i></a>
+                        <a href="#" title="Editar"><i class="fas fa-edit students-action-icon"></i></a>
+                        <a href="#" title="Enviar Mensaje"><i class="fas fa-envelope students-action-icon"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+    
+    <div class="students-pagination">
+        <a href="#" class="students-pagination-link students-disabled"><i class="fas fa-chevron-left"></i> Anterior</a>
+        <a href="#" class="students-pagination-link students-active">1</a>
+        <a href="#" class="students-pagination-link">2</a>
+        <a href="#" class="students-pagination-link">3</a>
+        <a href="#" class="students-pagination-link">...</a>
+        <a href="#" class="students-pagination-link">15</a>
+        <a href="#" class="students-pagination-link">Siguiente <i class="fas fa-chevron-right"></i></a>
+    </div>
+</div>
+
+<div id="toast-container"></div>
+{% endblock %}

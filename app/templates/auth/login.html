@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Suiza - Iniciar Sesión</title>
+    <!-- Enlaza el archivo de estilos CSS -->
+    <link rel="stylesheet" href="../../static/auth/style/style.css">
+    <!-- Incluye Tailwind CSS desde CDN para un diseño rápido y profesional -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Importa la fuente Inter para el cuerpo de la página */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-dark-blue-dynamic">
+    <div class="login-card p-8 sm:p-12 rounded-3xl shadow-2xl max-w-sm w-11/12 mx-auto">
+        <!-- Logo y título -->
+        <div class="flex items-center justify-center mb-6">
+            <!-- Icono de ejemplo (puedes reemplazarlo por una imagen SVG) -->
+            <svg class="h-10 w-10 text-white mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2m-6 4h6m-6 4h6m8-4h2v4a2 2 0 01-2 2h-2m-4-2h-4m-4 0h-4m4-2h-4a2 2 0 01-2-2v-4h2m6 0h-6m4-4h2a2 2 0 012 2v4h-2m-6 0h6m-4-2h-4a2 2 0 01-2-2v-4h-2m-4-4h-2a2 2 0 00-2 2v4h2m6 0h-6m4-2h-4a2 2 0 01-2-2v-4h-2m-4-4h-2a2 2 0 00-2 2v4h-2m-4-4h-2a2 2 0 00-2 2v4h-2m-4-4h-2a2 2 0 00-2 2v4h-2"/>
+            </svg>
+            <h1 class="text-3xl text-white font-bold">Instituto Suiza</h1>
+        </div>
+
+        <!-- Formulario de inicio de sesión -->
+        <form action="{{ url_for('home_db.inicio') }}" >
+            <div class="mb-6">
+            <label for="username" class="sr-only">Usuario</label>
+            <input type="text" id="username" name="username" placeholder="Usuario" class="w-full bg-slate-800 bg-opacity-70 text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-slate-400 border border-transparent focus:border-blue-500 transition-colors" required>
+            </div>
+            <div class="mb-6">
+            <label for="password" class="sr-only">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Contraseña" class="w-full bg-slate-800 bg-opacity-70 text-white rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-slate-400 border border-transparent focus:border-blue-500 transition-colors" required>
+            </div>
+            <button type="submit" class="login-button w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg text-lg transition-colors"> 
+            Iniciar Sesión
+            </button>
+        </form>
+
+        <!-- Enlaces adicionales -->
+        <div class="flex justify-between items-center mt-6 text-sm">
+            <a href="#" class="text-blue-300 hover:text-blue-200 transition-colors">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+</body>
+</html>

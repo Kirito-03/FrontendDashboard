@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Principal{% endblock %}
+
+{% block content %}
+<section class="overview-cards">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="card-info">
+                <h3>Total Estudiantes</h3>
+                <p id="total-students">1250</p>
+            </div>
+        </div>
+        <div class="card-filters">
+            <select onchange="updateStudentCount(this.value)">
+                <option value="all">Todos</option>
+                <option value="active">Activos</option>
+                <option value="new">Nuevos (mes)</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-content">
+            <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="card-info">
+                <h3>Total Profesores</h3>
+                <p id="total-teachers">85</p>
+            </div>
+        </div>
+        <div class="card-filters">
+            <select onchange="updateTeacherCount(this.value)">
+                <option value="all">Todos</option>
+                <option value="active">Activos</option>
+                <option value="new">Nuevos (año)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-content">
+            <div class="card-icon"><i class="fas fa-book-open"></i></div>
+            <div class="card-info">
+                <h3>Cursos Activos</h3>
+                <p id="total-courses">45</p>
+            </div>
+        </div>
+        <div class="card-filters">
+            <select onchange="updateCourseCount(this.value)">
+                <option value="all">Todos</option>
+                <option value="full">Llenos</option>
+                <option value="low">Baja Inscripción</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-content">
+            <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="card-info">
+                <h3>Eventos Próximos</h3>
+                <p>5</p>
+            </div>
+        </div>
+        <div class="card-filters">
+            <select>
+                <option value="week">Esta Semana</option>
+                <option value="month">Este Mes</option>
+            </select>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard-sections">
+    <div class="section-column wide-column">
+        <div class="card kpi-card">
+            <h2>Indicadores Clave de Gestión</h2>
+            <div class="kpi-grid">
+                <div class="kpi-item">
+                    <div class="kpi-value">55 <i class="fas fa-arrow-up trend-up"></i></div>
+                    <div class="kpi-label">Nuevos Estudiantes (Últ. 30 días)</div>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-value">7 <i class="fas fa-exclamation-triangle warning-icon"></i></div>
+                    <div class="kpi-label">Cursos con Baja Inscripción</div>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-value">$12.500 <i class="fas fa-money-bill-wave trend-neutral"></i></div>
+                    <div class="kpi-label">Pagos Pendientes</div>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-value">12 <i class="fas fa-file-alt trend-up"></i></div>
+                    <div class="kpi-label">Nuevas Solicitudes (Admisión)</div>
+                </div>
+            </div>
+        </div>
+        <div class="card quick-actions">
+            <h2>Acciones Rápidas</h2>
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary" onclick="showToast('Nuevo usuario añadido con éxito!', 'success')"><i class="fas fa-user-plus"></i> Añadir Nuevo Usuario</a>
+                <a href="#" class="btn btn-secondary" onclick="showToast('Curso creado exitosamente.', 'success')"><i class="fas fa-book-medical"></i> Crear Nuevo Curso</a>
+                <a href="#" class="btn btn-accent" onclick="showToast('Roles y permisos actualizados.', 'info')"><i class="fas fa-tasks"></i> Asignar Rol / Permisos</a>
+                <a href="#" class="btn btn-outline" onclick="showToast('Documentos subidos correctamente.', 'success')"><i class="fas fa-file-upload"></i> Subir Documentos</a>
+            </div>
+        </div>
+    </div>
+    <div class="section-column narrow-column">
+        <div class="card activity-feed">
+            <h2>Actividad Reciente</h2>
+            <ul>
+                <li><i class="fas fa-check-circle activity-success"></i> **Juan Pérez** se matriculó en "Fundamentos de Programación" (<a href="#">ID: 2023001</a>). <span class="time">Hace 5 min</span></li>
+                <li><i class="fas fa-info-circle activity-info"></i> **Profesor Gómez** actualizó el temario de "Cálculo I". <span class="time">Hace 30 min</span></li>
+                <li><i class="fas fa-exclamation-triangle activity-warning"></i> **Alerta:** Hay 3 solicitudes de cambio de rol pendientes. <a href="#" class="action-link">Revisar</a> <span class="time">Hace 1 hora</span></li>
+                <li><i class="fas fa-user-plus activity-default"></i> **María López** se registró como nueva estudiante. <span class="time">Hace 2 horas</span></li>
+                <li><i class="fas fa-clipboard-list activity-default"></i> **Admin:** Nuevo reporte de asistencia generado. <span class="time">Ayer</span></li>
+                <li><a href="#" class="view-all-link">Ver toda la actividad <i class="fas fa-arrow-right"></i></a></li>
+            </ul>
+        </div>
+        <div class="card tasks-card">
+            <h2>Tareas Pendientes</h2>
+            <ul>
+                <li>
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Revisar 3 solicitudes de cambio de rol <span class="task-priority high">Urgente</span>
+                    </label>
+                    <a href="#" class="task-action-link">Ir a Revisar</a>
+                </li>
+                <li>
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Actualizar el calendario académico <span class="task-priority medium">Esta semana</span>
+                    </label>
+                    <a href="#" class="task-action-link">Ir a Configuración</a>
+                </li>
+                <li>
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Añadir 20 estudiantes a cursos <span class="task-priority low">Pendiente</span>
+                    </label>
+                    <a href="#" class="task-action-link">Ir a Matriculación</a>
+                </li>
+                <li>
+                    <a href="#" class="add-task-link"><i class="fas fa-plus-circle"></i> Añadir nueva tarea</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Scripts específicos de esta página (por ejemplo, para actualizar los contadores)
+    const studentCounts = {
+        all: 1250,
+        active: 1100,
+        new: 55
+    };
+    const teacherCounts = {
+        all: 85,
+        active: 80,
+        new: 5
+    };
+    const courseCounts = {
+        all: 45,
+        full: 15,
+        low: 7
+    };
+
+    function updateStudentCount(filter) {
+        document.getElementById('total-students').textContent = studentCounts[filter];
+    }
+    function updateTeacherCount(filter) {
+        document.getElementById('total-teachers').textContent = teacherCounts[filter];
+    }
+    function updateCourseCount(filter) {
+        document.getElementById('total-courses').textContent = courseCounts[filter];
+    }
+
+    // Lógica para mostrar mensajes "toast" (asumiendo que los estilos están en tu CSS)
+    function showToast(message, type = 'info', duration = 3000) {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.classList.add('toast', type);
+        toast.textContent = message;
+
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('hide');
+            toast.addEventListener('transitionend', () => toast.remove());
+        }, duration);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,217 @@
+/* --- Estilos Comunes para las Páginas de Gestión --- */
+
+/* Contenedor de Controles (Búsqueda, Filtros y Botones) */
+.users-controls, .students-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.users-search-and-filter, .students-search-and-filter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Búsqueda */
+.users-search-container, .students-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.users-search-container i, .students-search-container i {
+    position: absolute;
+    left: 15px;
+    color: var(--text-medium);
+}
+.users-search-input, .students-search-input {
+    padding: 10px 15px 10px 40px;
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 250px;
+}
+.users-search-input:focus, .students-search-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Filtros */
+.users-filter-select, .students-filter-select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text-medium);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237F8C8D'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 10px center / 15px;
+    padding-right: 35px;
+}
+
+/* Estilos de Tabla */
+.users-table-card, .students-table-card {
+    padding: 0;
+    overflow-x: auto;
+}
+
+.users-table-container, .students-table-container {
+    width: 100%;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.users-table-card table, .students-table-card table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+.users-table-card thead, .students-table-card thead {
+    background-color: var(--background-light);
+    border-bottom: 2px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.users-table-card th, .students-table-card th {
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-medium);
+}
+
+.users-table-card tbody tr, .students-table-card tbody tr {
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color 0.2s ease;
+}
+
+.users-table-card tbody tr:last-child, .students-table-card tbody tr:last-child {
+    border-bottom: none;
+}
+
+.users-table-card tbody tr:hover, .students-table-card tbody tr:hover {
+    background-color: var(--background-light);
+}
+
+.users-table-card td, .students-table-card td {
+    padding: 15px 20px;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.users-actions-column, .students-actions-column {
+    text-align: center;
+    width: 120px;
+}
+
+.users-action-icon, .students-action-icon {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin: 0 5px;
+    transition: color 0.2s ease;
+}
+
+.users-action-icon:hover, .students-action-icon:hover {
+    color: var(--primary-dark);
+}
+
+/* Estados */
+.users-status, .students-status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.users-status-active, .students-status-enrolled {
+    background-color: var(--activity-success);
+}
+.users-status-inactive, .students-status-dropped {
+    background-color: var(--activity-warning);
+}
+.users-status-suspended, .students-status-graduated {
+    background-color: var(--activity-info);
+}
+
+
+/* Paginación */
+.users-pagination, .students-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid var(--border-light);
+    background-color: var(--white);
+    border-radius: 0 0 8px 8px;
+    margin-top: 0;
+}
+
+.users-pagination-link, .students-pagination-link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.users-pagination-link:hover:not(.users-disabled):not(.users-active),
+.students-pagination-link:hover:not(.students-disabled):not(.students-active) {
+    background-color: var(--background-light);
+    border-color: var(--border-light);
+}
+
+.users-pagination-link.users-active, .students-pagination-link.students-active {
+    background-color: var(--accent-blue);
+    color: var(--white);
+    border-color: var(--accent-blue);
+}
+
+.users-pagination-link.users-disabled, .students-pagination-link.students-disabled {
+    color: var(--text-light);
+    cursor: not-allowed;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .users-controls, .students-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .users-search-and-filter, .students-search-and-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .users-search-input, .users-filter-select, 
+    .students-search-input, .students-filter-select,
+    .users-controls .btn, .students-controls .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .users-table-card table, .students-table-card table {
+        min-width: 500px;
+    }
+
+    .users-actions-column, .students-actions-column {
+        min-width: 100px;
+    }
+}

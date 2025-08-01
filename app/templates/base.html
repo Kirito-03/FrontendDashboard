@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard Admin{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/base/style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/gestion_usuarios/style/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='../static/base/img/logo dsi.png') }}" alt="Logo del Instituto" class="logo">
+                <h2>instituto suisa</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="{% if active_page == 'dashboard' %}active{% endif %}"><a href="{{ url_for('home_db.inicio') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-users"></i> Gestión de Usuarios <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="{{ url_for('gu_estudiante.estudiantes') }}"><i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+                            <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+                            <li><a href="#"><i class="fas fa-user-tie"></i> Personal Administrativo</a></li>
+                            <li><a href="#"><i class="fas fa-user-tag"></i> Roles y Permisos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-book"></i> Gestión de Cursos <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#"><i class="fas fa-plus-circle"></i> Crear Curso</a></li>
+                            <li><a href="#"><i class="fas fa-list"></i> Ver Cursos</a></li>
+                            <li><a href="#"><i class="fas fa-calendar-alt"></i> Horarios</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="has-submenu">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> Gestión Académica <i class="fas fa-chevron-right submenu-arrow"></i></a>
+                        <ul class="submenu">
+                            <li><a href="#"><i class="fas fa-clipboard-list"></i> Matriculación</a></li>
+                            <li><a href="#"><i class="fas fa-percent"></i> Calificaciones</a></li>
+                            <li><a href="#"><i class="fas fa-check-circle"></i> Asistencia</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="{{ url_for('confg_sistema.confg_sistema') }}"><i class="fas fa-cogs"></i> Configuración del Sistema</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Reportes y Análisis</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2025 Instituto [Nombre]</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1>{% block header_title %}Dashboard del Administrador{% endblock %}</h1>
+                    <span id="current-date-time" class="datetime"></span>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">...</div>
+                    <div class="notification-center">...</div>
+                    <div class="user-info">
+                        <span>Hola, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </header>
+
+            {% block content %}{% endblock %}
+
+        </main>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        // Actualiza la fecha y hora en el header
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const formatted = now.toLocaleDateString('es-ES', options);
+            const dateTimeElem = document.getElementById('current-date-time');
+            if (dateTimeElem) {
+                dateTimeElem.textContent = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+            }
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Menú lateral: abrir/cerrar submenús
+        document.querySelectorAll('.has-submenu > a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                parent.classList.toggle('open');
+                const submenu = parent.querySelector('.submenu');
+                if (submenu) {
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+
+        // Notificaciones (simulado)
+        // Asegúrate de tener un elemento con id="notification-bell" en tu HTML si quieres usar esto
+        const notificationBell = document.getElementById('notification-bell');
+        if (notificationBell) {
+            notificationBell.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const center = document.querySelector('.notification-center');
+                if (center) {
+                    center.classList.toggle('open');
+                }
+            });
+        }
+
+        // Cierra notificaciones al hacer click fuera
+        document.addEventListener('click', function(event) {
+            const center = document.querySelector('.notification-center');
+            if (center && center.classList.contains('open')) {
+                if (!center.contains(event.target) && event.target.id !== 'notification-bell') {
+                    center.classList.remove('open');
+                }
+            }
+        });
+
+        // Toast messages
+        function showToast(message, type = 'info', duration = 3000) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('fade');
+                setTimeout(() => toast.remove(), 500);
+            }, duration);
+        }
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
